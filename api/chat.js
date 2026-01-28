@@ -19,12 +19,13 @@ export default async function handler(req, res) {
     if (!message) throw new Error("No message received from frontend.");
 
     // UPDATED URL: Using v1 instead of v1beta and the standard model name
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: `You are a helpful assistant for Terugu Arun's portfolio. Arun is skilled in C++, Python, and React. Answer briefly: ${message}` }] }]
-      })
+    // UPDATED URL: Using v1 with the specific flash-latest model name
+const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-latest:generateContent?key=${API_KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        contents: [{ parts: [{ text: `You are an AI assistant for Terugu Arun. Answer briefly: ${message}` }] }]
+    })
     });
 
     const data = await response.json();
