@@ -7,7 +7,6 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   try {
-    // 1. Manually check req.body. Sometimes Vercel needs help parsing JSON
     let body = req.body;
     if (typeof body === 'string') {
         body = JSON.parse(body);
@@ -19,23 +18,25 @@ export default async function handler(req, res) {
     if (!API_KEY) throw new Error("GEMINI_KEY is missing in Vercel settings.");
     if (!message) throw new Error("No message received from frontend.");
 
-    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
+    // UPDATED URL: Using v1 instead of v1beta and the standard model name
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${API_KEY}`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        contents: [{ parts: [{ text: `You are an AI assistant for Terugu Arun. Answer briefly: ${message}` }] }]
+        contents: [{ parts: [{ text: `You are a helpful assistant for Terugu Arun's portfolio. Arun is skilled in C++, Python, and React. Answer briefly: ${message}` }] }]
       })
     });
 
     const data = await response.json();
     
+    // Safety check for the specific structure of the Gemini response
     if (data.error) throw new Error(data.error.message);
+    if (!data.candidates || !data.candidates[0]) throw new Error("AI returned an empty response.");
 
     const botReply = data.candidates[0].content.parts[0].text;
     res.status(200).json({ reply: botReply });
 
   } catch (error) {
-    // This sends the actual error back to your chat window so you can see it!
     res.status(200).json({ reply: `Backend Error: ${error.message}` });
   }
 }
