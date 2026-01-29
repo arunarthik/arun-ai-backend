@@ -16,11 +16,11 @@ export default async function handler(req, res) {
     const { message } = body || {};
     if (!message) throw new Error("No message provided");
 
-    const API_KEY = process.env.GEMINI_KEY;
-    if (!API_KEY) throw new Error("Missing GEMINI_KEY");
+    const API_KEY = process.env.GEMINI_API_KEY;
+    if (!API_KEY) throw new Error("Missing GEMINI_API_KEY");
 
     const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-001:generateContent?key=${process.env.GEMINI_KEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash-001:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -40,7 +40,7 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error?.message || "Gemini API failed");
+      throw new Error(data.error?.message || " API failed");
     }
 
     const reply =
