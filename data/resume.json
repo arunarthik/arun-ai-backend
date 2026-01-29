@@ -1,24 +1,23 @@
 {
-"name": "Terugu Arun",
-"title": "Backend Developer (Python / FastAPI)",
-"experience": [
-"2+ years experience in Python and FastAPI",
-"1 year experience in Flask",
-"Backend developer on a pharmaceutical project",
-"Built a library management system using FastAPI with authentication, 
-fines, and relational DB mapping"
-],
-"skills": [
-"Python",
-"FastAPI",
-"Flask",
-"Docker",
-"Jenkins",
-"PL/SQL",
-"Basic Java",
-"CSS",
-"REST APIs",
-"Authentication & Authorization"
-],
-"career": "Applying for 3-year Python Developer role"
+  "name": "Terugu Arun",
+  "title": "Backend Developer (Python / FastAPI)",
+  "experience": [
+    "2+ years experience in Python and FastAPI",
+    "1 year experience with Flask",
+    "Backend developer on a pharmaceutical project",
+    "Built a library management system using FastAPI with authentication, fines, and relational DB mapping"
+  ],
+  "skills": [
+    "Python",
+    "FastAPI",
+    "Flask",
+    "Docker",
+    "Jenkins",
+    "PL/SQL",
+    "Basic Java",
+    "CSS",
+    "REST APIs",
+    "Authentication and Authorization"
+  ],
+  "career": "Applying for a 3-year Python Developer role"
 }
